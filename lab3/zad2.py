@@ -6,6 +6,10 @@ import time as t
 def endurance(x, y, z, u, v, w):
     return math.exp(-2*(y-math.sin(x))**2)+math.sin(z*u)+math.cos(v*w)
 
+
+dudekPrediction = endurance(0, 0, 0.999999999999999, 0.99999999999999999999, 0, 0.5)
+print(dudekPrediction)
+
 random_solutions = []
 start_random = t.time()
 for k in range(16000000):
