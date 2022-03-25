@@ -7,12 +7,12 @@ def endurance(x, y, z, u, v, w):
     return math.exp(-2*(y-math.sin(x))**2)+math.sin(z*u)+math.cos(v*w)
 
 
-dudekPrediction = endurance(0, 0, 0.999999999999999, 0.99999999999999999999, 0, 0.5)
-print(dudekPrediction)
+# dudekPrediction = endurance(0, 0, 0.999999999999999, 0.99999999999999999999, 0, 0.5)
+# print(dudekPrediction)
 
 random_solutions = []
 start_random = t.time()
-for k in range(16000000):
+for k in range(16):
     parameters = [rd.random() for x in range(6)]
     random_solutions.append(endurance(parameters[0], parameters[1], parameters[2], parameters[3], parameters[4], parameters[5]))
 end_random = t.time()
@@ -28,7 +28,7 @@ ga_instance = pygad.GA(init_range_low=0,
                        random_mutation_min_val=0,
                        random_mutation_max_val=1,
                        mutation_by_replacement=True,
-                       num_generations=40000,
+                       num_generations=400,
                        mutation_percent_genes = 30,
                        fitness_func=fitness_func,
                        crossover_type = "single_point",
@@ -50,7 +50,8 @@ print(f"Parameters of the best solution:\n{solution[0]}\n{solution[1]}\n{solutio
 
 
 print(f"Fitness value of the best solution = {solution_fitness}, elapsed time: {round(end_AI - start_AI, 2)} seconds.")
-print(f"Best random solution: {bestRandomResult}, elapsed time {round(end_random - start_random, 2)} seconds.")
+# print(f"Best random solution: {bestRandomResult}, elapsed time {round(end_random - start_random, 2)} seconds.")
  
 change_percent = ((float(solution_fitness)-bestRandomResult)/bestRandomResult)*100
 print(f"Difference between AI and random solution: {solution_fitness - bestRandomResult}, percentage difference: {round(change_percent, 3)}%")
+ga_instance.plot_fitness()
