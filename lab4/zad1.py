@@ -1,4 +1,3 @@
-import random as rd
 import pyswarms as ps
 from matplotlib import pyplot as plt
 from pyswarms.utils.functions import single_obj as fx

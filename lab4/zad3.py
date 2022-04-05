@@ -20,7 +20,7 @@ options = {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
 #                                     options=options)
 
 optimizer = ps.single.GeneralOptimizerPSOBestPSO(n_particles=10, dimensions=2,
-                                    options=options, topology=Star())
+                                    options=options, topology=Star())   # przetestowałem też inne
 
 cost_history = optimizer.cost_history
 # Perform optimization

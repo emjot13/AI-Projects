@@ -35,3 +35,6 @@ animation = plot_contour(pos_history=pos_history,
                          mesher=m,
                          mark=(0, 0))
 animation.save('plot0.gif', writer='imagemagick', fps=10)
+
+
+
