@@ -38,7 +38,7 @@ def tcnfgen(m, k, horn=2):
         if horn:
             cnf.append([(x, 1), (y, 0), (z, 0)])
         else:
-            cnf.append([(x, r()), (y, r()), (z, r())])
+            cnf.append([(x, r), (y, r()), (z, r())])
     return cnf
 
 
@@ -63,8 +63,8 @@ def fromFile(filename):
         return [[int(x) for x in lines[x][:-3].split(" ")] for x in range(len(lines))]
 
 
-cnf = fromFile('project/CNFs/S.txt')
-cnfFlat = [item for sublist in cnf[:10] for item in sublist]
+cnf = fromFile('/home/LABPK/mjarzembinski/Pulpit/INF_Mateusz_Jarzembinski_275039/project/CNFs/S.txt')
+cnfFlat = [item for sublist in cnf for item in sublist]
 # print(cnfFlat)
 
 # cnf = [[5, 3, 2], [-5, 2, 3], [-2, -3, 5]]
@@ -77,15 +77,15 @@ def fitness(solution, solution_idx):
     fitness = 0
     for x in range(0, len(solution), 3):
         if 1 not in solution[x:x+3]:
-            fitness -= 5
+            fitness -= 3
     for x in range(len(solution)):
         literal = cnfFlat[x]
         if -literal in hashMap.keys():
             if solution[x] == hashMap[-literal]:
-                fitness -= 4
+                fitness -= 1
         elif literal in hashMap.keys():
             if solution[x] != hashMap[literal]:
-                fitness -= 4
+                fitness -= 1
         else:
             hashMap[literal] = solution[x]
     return fitness
@@ -95,13 +95,14 @@ def fitness(solution, solution_idx):
 
 gene_space = [0, 1]
 ga_instance = pygad.GA(gene_space=gene_space,
-                       num_generations=1000,
-                       mutation_percent_genes=15,
+                       num_generations=500,
+                       mutation_type="scramble",
+                       mutation_percent_genes=100/len(cnfFlat),
                        fitness_func=fitness,
                        crossover_type="single_point",
                        parent_selection_type="sss",
-                       num_parents_mating=60,
-                       sol_per_pop=150,
+                       num_parents_mating=int(0.2 * 1500),
+                       sol_per_pop=1500,
                        num_genes=len(cnfFlat),
 
                        )
@@ -109,6 +110,9 @@ ga_instance = pygad.GA(gene_space=gene_space,
 ga_instance.run()
 
 solution, solution_fitness, solution_idx = ga_instance.best_solution()
+
+
+
 
 print(solution, solution_fitness)
 
