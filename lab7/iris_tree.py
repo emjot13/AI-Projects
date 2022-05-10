@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-df = pd.read_csv("lab7/iris.csv")
+df = pd.read_csv("/home/emjot13/Desktop/studia/ai/lab7/iris.csv")
 
 (train_set, test_set) = train_test_split(df.values, train_size=0.7,
 random_state=2)
@@ -74,7 +74,7 @@ clf = tree.DecisionTreeClassifier()
 clf = clf.fit(X, y)
 tree.plot_tree(clf)
 # plt.show()
-# plt.savefig('tree.png', dpi=2000)
+plt.savefig('iris_tree.png', dpi=500)
 
 
 from sklearn.metrics import confusion_matrix
