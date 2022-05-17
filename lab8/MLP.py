@@ -21,7 +21,32 @@ trainX = train[column_names]
 trainY=train.Class
 testX= test[column_names]
 testY =test.Class  
-clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(3, 3), random_state=1)
+
+accuracy = {}
+
+
+clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(2), random_state=1, max_iter = 1000)
 clf.fit(trainX, trainY)
+clf_1 = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(3), random_state=1, max_iter = 1000)
+clf_1.fit(trainX, trainY)
+clf_2 = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(3, 3), random_state=1, max_iter = 1000)
+clf_2.fit(trainX, trainY)
 prediction = clf.predict(testX)
-print(f"Accuracy: {round(metrics.accuracy_score(prediction,testY), 2) * 100}%")
+prediction_1 = clf_1.predict(testX)
+prediction_2 = clf_2.predict(testX)
+
+accuracy["one layer, 2 neurons"], accuracy["one layer, 3 neurons"], accuracy["2 layers, 3 neurons each"] = prediction, prediction_1, prediction_2
+
+for k, v in accuracy.items(): 
+    score =  "{0:.2f}".format(metrics.accuracy_score(v, testY) * 100)
+    print(f"Accuracy of {k}: {score}%")
+
+
+# e) -> po przeprowadzeniu wszystkich koniecznych operacji MLP zaokrągla otrzymaną wartość do nabliższej odpowiadającej mu wartości neuronów warstwy wyjściowej
+
+
+
+
+# Accuracy of one layer, 2 neurons: 33.33%
+# Accuracy of one layer, 3 neurons: 97.78%
+# Accuracy of 2 layers, 3 neurons each: 100.00%
