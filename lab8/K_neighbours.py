@@ -40,6 +40,7 @@ plt.plot(range(1, 40), error, color='red', linestyle='dashed', marker='o',
 plt.title('Error Rate K Value')
 plt.xlabel('K Value')
 plt.ylabel('Mean Error')
+plt.savefig('k_neighbours_mean_error.png', dpi=500)
 
 
 ## accuracy: k3 - 100%, k5 - 97%, k11 - 94%
