@@ -21,4 +21,7 @@ d)
 - warstwy w pełni połączone - 2
 
 
+Zadanie 2.
 
+
+![alt_text](https://github.com/emjot13/INF_Mateusz_Jarzembinski_275039/blob/main/lab9/visuals/exercise%202%20images.png)
