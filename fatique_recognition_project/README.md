@@ -14,3 +14,5 @@ But for now to use the script you need to:
 3. run command pip install -r requirements.txt (don't worry if it takes quite a while, just be patient :D )
 4. run command python main.py
 5. Enjoy!
+
+For more information on the project you can read a PDF file where I shortly descibed all the proccess (in Polish).
